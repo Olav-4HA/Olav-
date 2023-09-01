@@ -12,8 +12,8 @@
 /* ********************************************* */
 /* globale variabelen die je gebruikt in je game */
 /* ********************************************* */
-var x;
-var y;
+var xPosities;
+var yPosities;
 var speedX;
 var speedY;
 const BREEDTE = 20;
@@ -32,10 +32,10 @@ const BREEDTE = 20;
 function setup() {
   // Maak een canvas (rechthoek) waarin je je speelveld kunt tekenen
   createCanvas(1280, 720);
-
+  xPosities = [130, 60, 470];
+  yPosities = [700, 1010, 40];
   // initialiseer waarden
-  x = width / 2;               // midden van de breedte van het canvas
-  y = height / 2;              // midden van de hoogte van het canvas
+  // midden van de hoogte van het canvas
   speedX = random(-5, 5);      // random waarde tussen -5 en 5
   speedY = random(-5, 5);      // 👆
 }
@@ -49,22 +49,25 @@ function draw() {
   // zwarte achtergrond
   background(0, 0, 0);
 
+  for (var i = 0; i < xPosities.length; i++) {
+    rect(xPosities[i], yPosities[i], BREEDTE, BREEDTE);
+
   // teken
   noStroke;
   fill(255, 255, 255);
-  rect(x, y, BREEDTE, BREEDTE);
+  rect(xPosities[i], yPosities[i], BREEDTE, BREEDTE);
 
   // update positie
-  x = x + speedX;
-  y = y + speedY;
+  xPosities[i] = xPosities[i] + speedX;
+  yPosities[i] = yPosities[i] + speedY;
 
   // stuiter evt. tegen de kanten
-  if (x <= 0 || x + BREEDTE >= width) {
+  if (xPosities[i] <= 0 || xPosities[i] + xPosities.length >= width) {
     speedX = speedX * -1;
   }
 
-  if (y <= 0 || y + BREEDTE >= height) {
+  if (yPosities[i] <= 0 || yPosities[i] + yPosities.lentgh >= height) {
     speedY = speedY * -1;
   }
-
+  }
 }
